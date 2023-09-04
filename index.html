@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Конвертер валют</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        #result {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+        <h1>Конвертер валют</h1>
+        <label for="currency">Оберіть валюту:</label>
+        <select id="currency">
+
+        </select>
+        <br>
+        <label for="amount">Введіть суму в гривні:</label>
+        <p></p>
+        <input type="number" id="amount" min="0">
+        <br>
+        <p></p>
+        <button id="convert" class="my-button">Конвертувати</button>
+        <p></p>
+        <div id="result"></div>
+    </div>
+    <style>
+        body {
+            background-image: url('backgrounf.jpeg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed; 
+            font-size: 18px; 
+            
+        }
+        h1 {
+            color: gold; 
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
+        }
+        .my-button {
+            background-color: #ffcc00;              
+            color: #fff;
+            border: none; 
+            padding: 10px 20px;
+            border-radius: 5px; 
+            font-size: 16px; 
+            cursor: pointer; 
+            box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); 
+        }
+
+        .my-button:hover {
+            background-color: #ff9900; 
+        }
+
+    </style>
+
+    <script>
+        const currencySelect = document.getElementById('currency');
+        const amountInput = document.getElementById('amount');
+        const convertButton = document.getElementById('convert');
+        const resultDiv = document.getElementById('result');
+
+
+        const currencies = [
+            { txt: 'Австралійський долар', rate: 23.6453 },
+            { txt: 'Канадський долар', rate: 26.8976 },
+            
+        ];
+
+ 
+        currencies.forEach(currency => {
+            const option = document.createElement('option');
+            option.value = currency.rate;
+            option.textContent = currency.txt;
+            currencySelect.appendChild(option);
+        });
+
+
+        convertButton.addEventListener('click', () => {
+            const selectedCurrencyRate = currencySelect.value;
+            const amountInUAH = amountInput.value;
+            const convertedAmount = amountInUAH / selectedCurrencyRate;
+
+            resultDiv.textContent = `Результат: ${convertedAmount.toFixed(2)} ${currencySelect.options[currencySelect.selectedIndex].text}`;
+        });
+    </script>
+</body>
+</html>
